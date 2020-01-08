@@ -1,7 +1,7 @@
 package com.pguptafeb.ecommercedemo.network
 
 import com.pguptafeb.ecommercedemo.models.ModelServerResponse
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 
 
@@ -11,5 +11,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("json")
-    fun getAllProducts(): Call<ModelServerResponse>
+    fun getAllProducts():Observable<ModelServerResponse>
 }

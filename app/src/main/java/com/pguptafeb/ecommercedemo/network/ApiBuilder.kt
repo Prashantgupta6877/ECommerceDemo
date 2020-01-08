@@ -13,11 +13,12 @@ import java.util.concurrent.TimeUnit
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
 
-const val BASE_URL: String = "https://stark-spire-93433.herokuapp.com/"
 
 object ApiBuilder {
 
-    val moshi: Moshi = Moshi.Builder().build()
+    private const val BASE_URL: String = "https://stark-spire-93433.herokuapp.com/"
+
+    private val moshi: Moshi = Moshi.Builder().build()
 
     private val httpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
