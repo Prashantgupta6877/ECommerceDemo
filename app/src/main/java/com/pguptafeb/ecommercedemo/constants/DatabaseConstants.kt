@@ -6,7 +6,7 @@ const val VARIANT_TABLE_NAME = "Variant"
 const val TAX_TABLE_NAME = "TAX"
 
 const val CATEGORY_ID = "category_id"
-const val CATEGORY_NAME = "category_id"
+const val CATEGORY_NAME = "category_name"
 const val PRODUCT_ID = "product_id"
 const val PRODUCT_NAME = "product_name"
 const val DATE_ADDED = "date_added"

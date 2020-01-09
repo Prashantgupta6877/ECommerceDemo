@@ -2,6 +2,7 @@ package com.pguptafeb.ecommercedemo.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
@@ -13,6 +14,11 @@ import com.squareup.moshi.Json
 @Entity(tableName = VARIANT_TABLE_NAME)
 data class ModelVariant(
 
+    @ForeignKey(
+        entity = ModelProduct::class,
+        parentColumns = [PRODUCT_ID],
+        childColumns = [PRODUCT_ID]
+    )
     var productId: Int = 0,
 
     @Json(name = "id")
