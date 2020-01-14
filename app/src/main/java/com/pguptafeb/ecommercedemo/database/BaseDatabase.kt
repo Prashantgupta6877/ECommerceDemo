@@ -1,39 +1,37 @@
 package com.pguptafeb.ecommercedemo.database
 
-import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.pguptafeb.ecommercedemo.database.dao.CategoryDao
-import com.pguptafeb.ecommercedemo.database.dao.ProductDao
-import com.pguptafeb.ecommercedemo.database.dao.ProductTaxDao
-import com.pguptafeb.ecommercedemo.database.dao.VariantDao
+import android.database.sqlite.SQLiteDatabase
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
+import com.j256.ormlite.support.ConnectionSource
+import com.j256.ormlite.table.TableUtils
+import com.pguptafeb.ecommercedemo.ECommerceApplication
 import com.pguptafeb.ecommercedemo.models.*
 
-@Database(
-    entities = [ModelCategory::class, ModelProduct::class, ModelVariant::class
-        , ModelProductTax::class], version = 1, exportSchema = false
-)
-abstract class BaseDatabase : RoomDatabase() {
-    abstract fun categoryDao(): CategoryDao
-    abstract fun productDao(): ProductDao
-    abstract fun variantDao(): VariantDao
-    abstract fun productTaxDao(): ProductTaxDao
+private const val DB_NAME = "ECommerce"
+private const val DB_VERSION = 1
 
-    companion object {
+object BaseDatabase: OrmLiteSqliteOpenHelper(ECommerceApplication.context, DB_NAME, null, DB_VERSION) {
 
-        private var INSTANCE: BaseDatabase? = null
+    init {
+        val db = writableDatabase
+        db.execSQL("PRAGMA foreign_keys = ON;")
+    }
 
-        fun getDatabase(context: Context): BaseDatabase? {
-            if (INSTANCE == null) {
-                synchronized(BaseDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        BaseDatabase::class.java, "chapter.db"
-                    ).allowMainThreadQueries().build()
-                }
-            }
-            return INSTANCE
-        }
+    override fun onCreate(database: SQLiteDatabase?, connectionSource: ConnectionSource?) {
+        TableUtils.createTableIfNotExists(connectionSource, ModelCategory::class.java)
+        TableUtils.createTableIfNotExists(connectionSource, ModelProduct::class.java)
+        TableUtils.createTableIfNotExists(connectionSource, ModelVariant::class.java)
+        TableUtils.createTableIfNotExists(connectionSource, ModelProductTax::class.java)
+        TableUtils.createTableIfNotExists(connectionSource, ModelRanking::class.java)
+        TableUtils.createTableIfNotExists(connectionSource, ModelProductRanking::class.java)
+    }
+
+    override fun onUpgrade(
+        database: SQLiteDatabase?,
+        connectionSource: ConnectionSource?,
+        oldVersion: Int,
+        newVersion: Int
+    ) {
+
     }
 }

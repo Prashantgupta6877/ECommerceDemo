@@ -1,10 +1,10 @@
 package com.pguptafeb.ecommercedemo.screens
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.facebook.stetho.Stetho
 import com.pguptafeb.ecommercedemo.R
-import com.pguptafeb.ecommercedemo.database.BaseDatabase
+import com.pguptafeb.ecommercedemo.database.dao.*
 import com.pguptafeb.ecommercedemo.models.ModelServerResponse
 import com.pguptafeb.ecommercedemo.network.ApiBuilder
 import com.pguptafeb.ecommercedemo.network.ApiService
@@ -16,9 +16,8 @@ import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
-    private var compositDisposable: CompositeDisposable? = null
+    private var compositeDisposable: CompositeDisposable? = null
     private var request: ApiService? = null
-    private var db: BaseDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         Stetho.initializeWithDefaults(this)
 
-        compositDisposable = CompositeDisposable()
+        compositeDisposable = CompositeDisposable()
         request = ApiBuilder.create()
-        db = BaseDatabase.getDatabase(this@MainActivity)
 
         fetchData()
 
@@ -43,28 +41,49 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onSubscribe(d: Disposable) {
-                    compositDisposable?.add(d)
+                    compositeDisposable?.add(d)
                 }
 
                 override fun onNext(response: ModelServerResponse) {
 
-                    response.categories.forEach { category ->
+                    response.categories.forEach {
+                        CategoryDao.dao.createOrUpdate(it)
+                        it.products?.forEach { modelProduct ->
 
-                        db?.categoryDao()?.insertCategory(category)
+                            modelProduct.modelCategory = it
 
-                        category.products?.forEach { product ->
+                            ProductDao.dao.createOrUpdate(modelProduct)
 
-                            db?.productDao()?.insertProduct(product)
-
-                            product.variants?.let {
-                                db?.variantDao()?.insertAllVariant(it)
+                            modelProduct.variants?.forEach { modelVariant ->
+                                modelVariant.modelProduct = modelProduct
+                                VariantDao.dao.createOrUpdate(modelVariant)
                             }
 
-                            product.modelProductTax?.let {
-                                db?.productTaxDao()?.insertProductTax(it)
+                            modelProduct.modelProductTax?.let { modelTax ->
+
+                                modelTax.modelProduct = modelProduct
+                                ProductTaxDao.createOrUpdateProductTax(modelTax)
                             }
                         }
+                    }
 
+                    response.rankings.forEach { modelRanking ->
+                        RankingDao.createRanking(modelRanking)
+
+                        modelRanking.products?.forEach { modelProductRanking ->
+                            ProductDao.dao.queryForId(modelProductRanking.id)?.let {
+                                modelProductRanking.modelProduct = it
+                            }
+                            modelProductRanking.modelRanking = modelRanking
+
+                            modelProductRanking.count =
+                                when {
+                                    modelProductRanking.viewCount > 0 -> modelProductRanking.viewCount
+                                    modelProductRanking.orderCount > 0 -> modelProductRanking.orderCount
+                                    else -> modelProductRanking.shares
+                                }
+                            ProductRankingDao.dao.createOrUpdate(modelProductRanking)
+                        }
                     }
                 }
 

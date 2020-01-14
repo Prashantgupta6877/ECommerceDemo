@@ -1,39 +1,29 @@
 package com.pguptafeb.ecommercedemo.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
-import com.pguptafeb.ecommercedemo.constants.PRODUCT_ID
-import com.pguptafeb.ecommercedemo.constants.TAX_NAME
-import com.pguptafeb.ecommercedemo.constants.TAX_TABLE_NAME
-import com.pguptafeb.ecommercedemo.constants.TAX_VALUE
+import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.table.DatabaseTable
+import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
 
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+@DatabaseTable(tableName = TABLE_NAME_TAX)
+class ModelProductTax {
 
-@Entity(tableName = TAX_TABLE_NAME)
-data class ModelProductTax(
-
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    @DatabaseField(columnName = TAX_ID, generatedId = true)
+    var id: Int = 0
 
     @Json(name = "name")
-    @ColumnInfo(name = TAX_NAME)
-    var taxName: String,
+    @DatabaseField(columnName = TAX_NAME)
+    var taxName: String? = null
 
     @Json(name = "value")
-    @ColumnInfo(name = TAX_VALUE)
-    var taxValue: Float,
+    @DatabaseField(columnName = TAX_VALUE)
+    var taxValue: Float = 0.0f
 
-    @ForeignKey(
-        entity = ModelProduct::class,
-        parentColumns = [PRODUCT_ID],
-        childColumns = [PRODUCT_ID]
-    )
-    var productId: Int
-)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = OBJ_PRODUCT_ID)
+    var modelProduct: ModelProduct? = null
+
+}

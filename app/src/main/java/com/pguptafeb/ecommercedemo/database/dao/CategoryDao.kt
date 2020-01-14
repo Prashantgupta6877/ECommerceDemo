@@ -1,13 +1,14 @@
 package com.pguptafeb.ecommercedemo.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import com.j256.ormlite.dao.Dao
+import com.pguptafeb.ecommercedemo.database.BaseDatabase
 import com.pguptafeb.ecommercedemo.models.ModelCategory
 
-@Dao
-interface CategoryDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategory(category: ModelCategory)
+/**
+ * Created by Prashant G. Gupta on 14, Jan 2020
+ */
+object CategoryDao {
+
+    val dao: Dao<ModelCategory, Int> = BaseDatabase.getDao(ModelCategory::class.java)
 }
