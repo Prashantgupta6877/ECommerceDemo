@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                                     modelProductRanking.orderCount > 0 -> modelProductRanking.orderCount
                                     else -> modelProductRanking.shares
                                 }
-                            ProductRankingDao.dao.createOrUpdate(modelProductRanking)
+                            ProductRankingDao.createOrUpdateProductRankingCount(modelProductRanking)
                         }
                     }
                 }
