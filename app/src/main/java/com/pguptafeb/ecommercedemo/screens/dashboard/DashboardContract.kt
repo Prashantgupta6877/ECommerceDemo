@@ -7,10 +7,12 @@ package com.pguptafeb.ecommercedemo.screens.dashboard
 interface DashboardContract {
 
     interface View {
-
+        fun showProgressDialog(isShown: Boolean)
     }
 
     interface Presenter {
+
+        fun onLoad()
 
     }
 
