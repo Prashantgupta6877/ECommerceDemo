@@ -59,32 +59,27 @@ class MainActivity : AppCompatActivity() {
                                 VariantDao.dao.createOrUpdate(modelVariant)
                             }
 
-                            modelProduct.modelProductTax?.let { modelTax ->
-
-                                modelTax.modelProduct = modelProduct
-                                ProductTaxDao.createOrUpdateProductTax(modelTax)
-                            }
                         }
                     }
 
-                    response.rankings.forEach { modelRanking ->
-                        RankingDao.createRanking(modelRanking)
-
-                        modelRanking.products?.forEach { modelProductRanking ->
-                            ProductDao.dao.queryForId(modelProductRanking.id)?.let {
-                                modelProductRanking.modelProduct = it
-                            }
-                            modelProductRanking.modelRanking = modelRanking
-
-                            modelProductRanking.count =
-                                when {
-                                    modelProductRanking.viewCount > 0 -> modelProductRanking.viewCount
-                                    modelProductRanking.orderCount > 0 -> modelProductRanking.orderCount
-                                    else -> modelProductRanking.shares
-                                }
-                            ProductRankingDao.createOrUpdateProductRankingCount(modelProductRanking)
-                        }
-                    }
+//                    response.rankings.forEach { modelRanking ->
+//                        RankingDao.createRanking(modelRanking)
+//
+//                        modelRanking.products?.forEach { modelProductRanking ->
+//                            ProductDao.dao.queryForId(modelProductRanking.id)?.let {
+//                                modelProductRanking.modelProduct = it
+//                            }
+//                            modelProductRanking.modelRanking = modelRanking
+//
+//                            modelProductRanking.count =
+//                                when {
+//                                    modelProductRanking.viewCount > 0 -> modelProductRanking.viewCount
+//                                    modelProductRanking.orderCount > 0 -> modelProductRanking.orderCount
+//                                    else -> modelProductRanking.shares
+//                                }
+//                            ProductRankingDao.dao.create(modelProductRanking)
+//                        }
+//                    }
                 }
 
                 override fun onError(e: Throwable) {

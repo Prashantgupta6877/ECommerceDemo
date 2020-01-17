@@ -1,6 +1,8 @@
 package com.pguptafeb.ecommercedemo.models
 
+import com.j256.ormlite.dao.ForeignCollection
 import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.field.ForeignCollectionField
 import com.j256.ormlite.table.DatabaseTable
 import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
@@ -31,4 +33,14 @@ class ModelProduct {
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = OBJ_CATEGORY_ID)
     var modelCategory: ModelCategory? = null
+
+    @DatabaseField(columnName = TAX_NAME)
+    var taxName: String? = null
+
+    @DatabaseField(columnName = TAX_VALUE)
+    var taxValue: Float? = null
+
+    @Transient
+    @ForeignCollectionField
+    var foreignCollectionVariant: ForeignCollection<ModelVariant>? = null
 }

@@ -3,7 +3,6 @@ package com.pguptafeb.ecommercedemo.constants
 const val TABLE_NAME_PRODUCT = "Product"
 const val TABLE_NAME_CATEGORY = "Category"
 const val TABLE_NAME_VARIANT = "Variant"
-const val TABLE_NAME_TAX = "Tax"
 const val TABLE_NAME_RANKING = "Ranking"
 const val TABLE_NAME_RANKING_PRODUCTS = "RankingProducts"
 

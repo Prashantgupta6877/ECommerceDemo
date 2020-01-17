@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ECommerceDemo</string>
+    <string name="sort">Sort</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+    <string name="more">More</string>
+    <string name="vat">VAT</string>
+    <string name="size">Size- </string>
+    <string name="colorpatch">colorPatch</string>
 </resources>

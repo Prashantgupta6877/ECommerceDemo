@@ -11,5 +11,4 @@ import com.pguptafeb.ecommercedemo.models.ModelVariant
 object VariantDao {
 
     val dao: Dao<ModelVariant, Int> = BaseDatabase.getDao(ModelVariant::class.java)
-
 }

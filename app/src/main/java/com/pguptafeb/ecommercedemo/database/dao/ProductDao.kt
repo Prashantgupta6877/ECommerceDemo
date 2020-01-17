@@ -12,4 +12,5 @@ object ProductDao {
 
     val dao: Dao<ModelProduct, Int> = BaseDatabase.getDao(ModelProduct::class.java)
 
+    fun fetchProducts(): MutableList<ModelProduct>? = dao.queryBuilder().query()
 }

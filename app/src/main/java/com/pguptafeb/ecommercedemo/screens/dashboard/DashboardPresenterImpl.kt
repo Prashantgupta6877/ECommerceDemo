@@ -6,17 +6,28 @@ class DashboardPresenterImpl(
 ) : DashboardContract.Presenter, DashboardRepositoryImpl.GetApiResponseListener {
 
 
-    override fun onLoad() {
+    override fun onLoad(isOnline: Boolean) {
 
-        repository.getDataFromAPI()
-
+        if (isOnline) {
+            view.showProgressDialog(true)
+            repository.getDataFromAPI(this)
+        } else {
+            setProductList()
+        }
     }
 
     override fun onSuccess() {
-
+        view.showProgressDialog(false)
+        setProductList()
     }
 
     override fun onFail(message: String) {
+        view.showProgressDialog(false)
+    }
 
+    override fun setProductList() {
+        repository.fetchProductList()?.let {
+            view.showProductList(it)
+        }
     }
 }

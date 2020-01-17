@@ -15,21 +15,4 @@ object ProductRankingDao {
 
     var dao: Dao<ModelProductRanking, Int> =
         BaseDatabase.getDao(ModelProductRanking::class.java)
-
-
-    fun createOrUpdateProductRankingCount(modelProductRanking: ModelProductRanking) {
-        val oldProductRanking = fetchProductRanking(modelProductRanking)
-        if (oldProductRanking != null) {
-            oldProductRanking.count = modelProductRanking.count
-            dao.update(oldProductRanking)
-        } else {
-            dao.create(modelProductRanking)
-        }
-    }
-
-    private fun fetchProductRanking(modelProductRanking: ModelProductRanking) =
-        dao.queryBuilder().where()
-            .eq(OBJ_RANKING_ID, modelProductRanking.modelRanking?.rankingId).and()
-            .eq(OBJ_PRODUCT_ID, modelProductRanking.modelProduct?.productId).queryForFirst()
-
 }
