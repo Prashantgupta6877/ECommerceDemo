@@ -5,4 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".screens.dashboard.DashboardActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="20"
+        tools:listitem="@layout/list_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,16 +11,4 @@ import com.pguptafeb.ecommercedemo.models.ModelRanking
  */
 object RankingDao {
     val dao: Dao<ModelRanking, Int> = BaseDatabase.getDao(ModelRanking::class.java)
-
-    private fun fetchRankingFor(rankingName: String) =
-        dao.queryBuilder().where().eq(
-            RANKING_NAME, rankingName
-        ).queryForFirst()
-
-    fun createRanking(modelRanking: ModelRanking) {
-        val oldRanking = fetchRankingFor(modelRanking.rankingName)
-        if (oldRanking == null) {
-            dao.create(modelRanking)
-        }
-    }
 }

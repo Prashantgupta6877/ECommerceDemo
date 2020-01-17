@@ -1,8 +1,22 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
+class DashboardPresenterImpl(
+    private val view: DashboardContract.View,
+    private val repository: DashboardContract.Repository
+) : DashboardContract.Presenter, DashboardRepositoryImpl.GetApiResponseListener {
 
-/**
- * Created by Prashant G. Gupta on 15, Jan 2020
- */
-class DashboardPresenterImpl : DashboardContract.Presenter {
+
+    override fun onLoad() {
+
+        repository.getDataFromAPI()
+
+    }
+
+    override fun onSuccess() {
+
+    }
+
+    override fun onFail(message: String) {
+
+    }
 }
