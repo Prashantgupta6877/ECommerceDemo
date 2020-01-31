@@ -1,10 +1,17 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
+import com.pguptafeb.ecommercedemo.models.ModelRanking
+
 class DashboardPresenterImpl(
     private val view: DashboardContract.View,
     private val repository: DashboardContract.Repository
 ) : DashboardContract.Presenter, DashboardRepositoryImpl.GetApiResponseListener {
 
+    override var rankingUserSelection: ModelRanking? = null
+
+    override fun setUpInitialUi() {
+        view.setUpInitialUi()
+    }
 
     override fun onLoad(isOnline: Boolean) {
 

@@ -2,13 +2,19 @@ package com.pguptafeb.ecommercedemo.models
 
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
-import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
 
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+
+const val TABLE_NAME_VARIANT = "Variant"
+const val VARIANT_ID = "variant_id"
+const val VARIANT_COLOR = "variant_color"
+const val VARIANT_SIZE = "variant_size"
+const val VARIANT_PRICE = "variant_price"
+const val OBJ_PRODUCT_ID = "obj_product_id"
 
 @DatabaseTable(tableName = TABLE_NAME_VARIANT)
 data class ModelVariant(

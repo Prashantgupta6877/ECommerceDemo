@@ -13,18 +13,19 @@ import com.pguptafeb.ecommercedemo.R
 import com.pguptafeb.ecommercedemo.constants.getAppColorPatchInHex
 import com.pguptafeb.ecommercedemo.extensions.toNotNullString
 import com.pguptafeb.ecommercedemo.models.ModelProduct
+import com.pguptafeb.ecommercedemo.models.ModelRanking
 import kotlinx.android.synthetic.main.list_item_products.view.*
 
 /**
  * Created by Prashant G. Gupta on 17, Jan 2020
  */
 class ProductListAdapters(
-    private var products: MutableList<ModelProduct>
+        private var products: MutableList<ModelProduct>
 ) : RecyclerView.Adapter<ProductListAdapters.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item_products, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.list_item_products, parent, false)
         return ViewHolder(view)
     }
 
@@ -58,7 +59,7 @@ class ProductListAdapters(
         val txtSize: TextView = itemView.txtSize
         val txtTaxTitle: TextView = itemView.txtVatTitle
         val txtTaxPercentage: TextView = itemView.txtVatPercentage
-        val imgColor: ImageView = itemView.imgColorPatch
+        private val imgColor: ImageView = itemView.imgColorPatch
         val txtPrice: TextView = itemView.txtPrice
 
         fun showVatView(isVisible: Boolean) {
@@ -72,5 +73,15 @@ class ProductListAdapters(
         fun setImageColor(colorName: String) {
             imgColor.setBackgroundColor(Color.parseColor(colorName.getAppColorPatchInHex()))
         }
+    }
+
+    fun sortProductsBy(modelRanking: ModelRanking) {
+
+        products.sortByDescending {
+            it.foreignCollectionProductRanking?.toMutableList()?.let { productRankings ->
+                productRankings.any { productRanking -> productRanking.modelRanking?.rankingId == modelRanking.rankingId }
+            }
+        }
+        notifyDataSetChanged()
     }
 }

@@ -2,14 +2,14 @@ package com.pguptafeb.ecommercedemo.models
 
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
-import com.pguptafeb.ecommercedemo.constants.CATEGORY_ID
-import com.pguptafeb.ecommercedemo.constants.CATEGORY_NAME
-import com.pguptafeb.ecommercedemo.constants.TABLE_NAME_CATEGORY
 import com.squareup.moshi.Json
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+const val CATEGORY_ID = "category_id"
+const val CATEGORY_NAME = "category_name"
+const val TABLE_NAME_CATEGORY = "Category"
 
 @DatabaseTable(tableName = TABLE_NAME_CATEGORY)
 class ModelCategory {

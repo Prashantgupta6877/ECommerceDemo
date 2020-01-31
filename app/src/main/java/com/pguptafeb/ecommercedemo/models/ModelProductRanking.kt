@@ -2,15 +2,22 @@ package com.pguptafeb.ecommercedemo.models
 
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
-import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
 
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+
+const val TABLE_NAME_RANKING_PRODUCTS = "RankingProducts"
+const val VIEW_COUNT = "view_count"
+const val ORDER_COUNT = "order_count"
+const val SHARES = "shares"
+const val OBJ_RANKING_ID = "obj_ranking_id"
+const val COUNT = "count"
+
 @DatabaseTable(tableName = TABLE_NAME_RANKING_PRODUCTS)
-class ModelProductRanking {
+class ModelProductRanking /*: Comparable<Int>*/ {
 
     @Json(name = "id")
     var id = 0
@@ -35,4 +42,8 @@ class ModelProductRanking {
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = OBJ_PRODUCT_ID)
     var modelProduct: ModelProduct? = null
+
+   /* override fun compareTo(other: Int): Int {
+        return if (count > other) 1 else 0
+    }*/
 }

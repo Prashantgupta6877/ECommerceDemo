@@ -17,31 +17,24 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
     SortingBottomSheet.OnSelectedItemListener {
 
     private lateinit var presenter: DashboardContract.Presenter
+    private lateinit var productAdapter: ProductListAdapters
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         presenter = DashboardPresenterImpl(this, DashboardRepositoryImpl())
-
-        initUI()
-
-        presenter.onLoad(false)
-
-        txtSort.setOnClickListener {
-            val bottomSheet = SortingBottomSheet(this)
-            bottomSheet.show(supportFragmentManager, "")
-        }
-
+        presenter.setUpInitialUi()
+        presenter.onLoad(true)
     }
 
-    private fun initUI() {
+    override fun setUpInitialUi() {
         rvProductList.layoutManager = LinearLayoutManager(this)
-        rvProductList.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.HORIZONTAL
-            )
-        )
+        rvProductList.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        txtSort.setOnClickListener {
+            val bottomSheet = SortingBottomSheet(this, presenter.rankingUserSelection)
+            bottomSheet.show(supportFragmentManager, "")
+        }
     }
 
     override fun showProgressDialog(isShown: Boolean) {
@@ -49,11 +42,14 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
     }
 
     override fun showProductList(products: MutableList<ModelProduct>) {
-        val productAdapter = ProductListAdapters(products)
+        productAdapter = ProductListAdapters(products)
         rvProductList.adapter = productAdapter
     }
 
     override fun onItemSelected(pickerItem: ModelRanking?) {
-
+        pickerItem?.let {
+            productAdapter.sortProductsBy(it)
+            presenter.rankingUserSelection = pickerItem
+        }
     }
 }

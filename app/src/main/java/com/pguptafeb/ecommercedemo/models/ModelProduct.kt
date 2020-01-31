@@ -4,12 +4,18 @@ import com.j256.ormlite.dao.ForeignCollection
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.field.ForeignCollectionField
 import com.j256.ormlite.table.DatabaseTable
-import com.pguptafeb.ecommercedemo.constants.*
 import com.squareup.moshi.Json
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+const val TABLE_NAME_PRODUCT = "Product"
+const val PRODUCT_ID = "product_id"
+const val PRODUCT_NAME = "product_name"
+const val DATE_ADDED = "date_added"
+const val TAX_NAME = "tax_name"
+const val TAX_VALUE = "tax_value"
+const val OBJ_CATEGORY_ID = "obj_category_id"
 
 @DatabaseTable(tableName = TABLE_NAME_PRODUCT)
 class ModelProduct {
@@ -43,4 +49,8 @@ class ModelProduct {
     @Transient
     @ForeignCollectionField
     var foreignCollectionVariant: ForeignCollection<ModelVariant>? = null
+
+    @Transient
+    @ForeignCollectionField
+    var foreignCollectionProductRanking: ForeignCollection<ModelProductRanking>? = null
 }

@@ -34,4 +34,13 @@ object BaseDatabase :
     ) {
 
     }
+
+
+    fun clearAllTablesData() {
+        TableUtils.clearTable(connectionSource, ModelCategory::class.java)
+        TableUtils.clearTable(connectionSource, ModelProduct::class.java)
+        TableUtils.clearTable(connectionSource, ModelVariant::class.java)
+        TableUtils.clearTable(connectionSource, ModelRanking::class.java)
+        TableUtils.clearTable(connectionSource, ModelProductRanking::class.java)
+    }
 }

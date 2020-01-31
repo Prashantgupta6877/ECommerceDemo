@@ -1,5 +1,6 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
+import com.pguptafeb.ecommercedemo.database.BaseDatabase
 import com.pguptafeb.ecommercedemo.database.dao.*
 import com.pguptafeb.ecommercedemo.models.ModelCategory
 import com.pguptafeb.ecommercedemo.models.ModelProduct
@@ -25,7 +26,7 @@ class DashboardRepositoryImpl : DashboardContract.Repository {
                 }
 
                 override fun onNext(response: ModelServerResponse) {
-
+                    clearAllTableData()
                     storeCategories(response.categories)
 
                     storeRanking(response.rankings)
@@ -90,6 +91,10 @@ class DashboardRepositoryImpl : DashboardContract.Repository {
     }
 
     override fun fetchProductList() = ProductDao.fetchProducts()
+
+    override fun clearAllTableData() {
+        BaseDatabase.clearAllTablesData()
+    }
 
     interface GetApiResponseListener {
 

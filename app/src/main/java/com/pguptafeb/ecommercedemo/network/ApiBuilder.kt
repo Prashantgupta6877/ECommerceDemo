@@ -18,6 +18,8 @@ object ApiBuilder {
 
     private const val BASE_URL: String = "https://stark-spire-93433.herokuapp.com/"
 
+    //    private const val BASE_URL: String = "http://www.mocky.io/v2/"
+
     private val moshi: Moshi = Moshi.Builder().build()
 
     private val httpLoggingInterceptor =

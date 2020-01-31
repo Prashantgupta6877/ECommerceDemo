@@ -2,6 +2,7 @@ package com.pguptafeb.ecommercedemo
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.Stetho
 
 
 /**
@@ -16,5 +17,6 @@ class ECommerceApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+        Stetho.initializeWithDefaults(this)
     }
 }

@@ -1,16 +1,21 @@
 package com.pguptafeb.ecommercedemo.models
 
+import com.j256.ormlite.dao.ForeignCollection
 import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.field.ForeignCollectionField
 import com.j256.ormlite.table.DatabaseTable
-import com.pguptafeb.ecommercedemo.constants.RANKING_ID
-import com.pguptafeb.ecommercedemo.constants.RANKING_NAME
-import com.pguptafeb.ecommercedemo.constants.TABLE_NAME_RANKING
 import com.squareup.moshi.Json
 
 
 /**
  * Created by Prashant G. Gupta on 08, Jan 2020
  */
+
+private const val TABLE_NAME_RANKING = "Ranking"
+private const val RANKING_NAME = "ranking_name"
+private const val RANKING_ID = "ranking_id"
+private const val IS_SELECTED = "is_selected"
+
 @DatabaseTable(tableName = TABLE_NAME_RANKING)
 class ModelRanking {
 
@@ -23,6 +28,12 @@ class ModelRanking {
 
     @Json(name = "products")
     var products: MutableList<ModelProductRanking>? = null
+
+    var isSelected: Boolean = false
+
+    @Transient
+    @ForeignCollectionField
+    var foreignCollectionProductRanking: ForeignCollection<ModelProductRanking>? = null
 }
 
 

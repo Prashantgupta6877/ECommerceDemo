@@ -1,6 +1,7 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
 import com.pguptafeb.ecommercedemo.models.ModelProduct
+import com.pguptafeb.ecommercedemo.models.ModelRanking
 
 
 /**
@@ -12,13 +13,18 @@ interface DashboardContract {
         fun showProgressDialog(isShown: Boolean)
 
         fun showProductList(products: MutableList<ModelProduct>)
+
+        fun setUpInitialUi()
     }
 
     interface Presenter {
+        var rankingUserSelection: ModelRanking?
 
         fun onLoad(isOnline: Boolean)
 
         fun setProductList()
+
+        fun setUpInitialUi()
     }
 
     interface Repository {
@@ -26,5 +32,7 @@ interface DashboardContract {
         fun getDataFromAPI(apiResponseListener: DashboardRepositoryImpl.GetApiResponseListener)
 
         fun fetchProductList(): MutableList<ModelProduct>?
+
+        fun clearAllTableData()
     }
 }
