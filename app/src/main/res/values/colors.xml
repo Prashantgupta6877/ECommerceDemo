@@ -8,5 +8,6 @@
     <color name="gray_fair_45">#666B80</color>
     <color name="activeBgColor">#F9DDDE</color>
     <color name="redSort">#CA444C</color>
+    <color name="dim_white">#E7DFDF</color>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.fragment.app.FragmentActivity
@@ -24,7 +27,8 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
         setContentView(R.layout.activity_dashboard)
         presenter = DashboardPresenterImpl(this, DashboardRepositoryImpl())
         presenter.setUpInitialUi()
-        presenter.onLoad(true)
+
+        presenter.onLoad(false)
     }
 
     override fun setUpInitialUi() {
@@ -35,6 +39,18 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
             val bottomSheet = SortingBottomSheet(this, presenter.rankingUserSelection)
             bottomSheet.show(supportFragmentManager, "")
         }
+
+        edtProductSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                productAdapter.filter.filter(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 
     override fun showProgressDialog(isShown: Boolean) {
@@ -42,7 +58,7 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
     }
 
     override fun showProductList(products: MutableList<ModelProduct>) {
-        productAdapter = ProductListAdapters(products)
+        productAdapter = ProductListAdapters(products, supportFragmentManager)
         rvProductList.adapter = productAdapter
     }
 
@@ -52,4 +68,16 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
             presenter.rankingUserSelection = pickerItem
         }
     }
+
+    override fun showNativeAlert(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(message)
+        builder.setNeutralButton(getString(R.string.cancel)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+
 }

@@ -30,6 +30,7 @@ class DashboardPresenterImpl(
 
     override fun onFail(message: String) {
         view.showProgressDialog(false)
+        view.showNativeAlert(message)
     }
 
     override fun setProductList() {
