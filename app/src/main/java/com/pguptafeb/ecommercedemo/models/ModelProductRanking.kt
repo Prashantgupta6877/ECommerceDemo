@@ -17,7 +17,7 @@ const val OBJ_RANKING_ID = "obj_ranking_id"
 const val COUNT = "count"
 
 @DatabaseTable(tableName = TABLE_NAME_RANKING_PRODUCTS)
-class ModelProductRanking /*: Comparable<Int>*/ {
+class ModelProductRanking {
 
     @Json(name = "id")
     var id = 0
@@ -42,8 +42,4 @@ class ModelProductRanking /*: Comparable<Int>*/ {
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = OBJ_PRODUCT_ID)
     var modelProduct: ModelProduct? = null
-
-   /* override fun compareTo(other: Int): Int {
-        return if (count > other) 1 else 0
-    }*/
 }

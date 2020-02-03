@@ -2,8 +2,6 @@ package com.pguptafeb.ecommercedemo
 
 import android.app.Application
 import android.content.Context
-import com.facebook.stetho.Stetho
-
 
 /**
  * Created by Prashant G. Gupta on 14, Jan 2020
@@ -17,6 +15,5 @@ class ECommerceApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-        Stetho.initializeWithDefaults(this)
     }
 }
