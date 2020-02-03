@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pguptafeb.ecommercedemo.R
 import com.pguptafeb.ecommercedemo.constants.getAppColorPatchInHex
+import com.pguptafeb.ecommercedemo.database.dao.ProductRankingDao
+import com.pguptafeb.ecommercedemo.database.dao.RankingDao
 import com.pguptafeb.ecommercedemo.dialog.VariantDialog
 import com.pguptafeb.ecommercedemo.extensions.toNotNullString
 import com.pguptafeb.ecommercedemo.models.ModelProduct
@@ -138,11 +140,18 @@ class ProductListAdapters(
 
     fun sortProductsBy(modelRanking: ModelRanking) {
 
-        products.sortedWith(compareByDescending {
-            it.foreignCollectionProductRanking?.toMutableList()?.let { productRankings ->
-                productRankings.any { productRanking -> productRanking.modelRanking?.rankingId == modelRanking.rankingId }
-            }
-        })
+        val rankingProducts = ProductRankingDao.fetchRankingProducts(modelRanking)
+        val listNotMatch = mutableListOf<ModelProduct>()
+
+        rankingProducts?.forEach { rankedProduct ->
+            listNotMatch.add(rankedProduct.modelProduct!!)
+            products.filter { it.productId == rankedProduct.modelProduct?.productId }
+                .map { products.remove(it) }
+
+        }
+        listNotMatch.addAll(products)
+        products.clear()
+        products.addAll(listNotMatch)
         notifyDataSetChanged()
     }
 }

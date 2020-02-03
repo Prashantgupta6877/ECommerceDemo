@@ -1,6 +1,8 @@
 package com.pguptafeb.ecommercedemo.screens.dashboard
 
 import android.app.AlertDialog
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +18,7 @@ import com.pguptafeb.ecommercedemo.models.ModelProduct
 import com.pguptafeb.ecommercedemo.models.ModelRanking
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
+
 class DashboardActivity : FragmentActivity(), DashboardContract.View,
     SortingBottomSheet.OnSelectedItemListener {
 
@@ -27,8 +30,7 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
         setContentView(R.layout.activity_dashboard)
         presenter = DashboardPresenterImpl(this, DashboardRepositoryImpl())
         presenter.setUpInitialUi()
-
-        presenter.onLoad(false)
+        presenter.onLoad(isNetworkAvailable())
     }
 
     override fun setUpInitialUi() {
@@ -79,5 +81,10 @@ class DashboardActivity : FragmentActivity(), DashboardContract.View,
         dialog.show()
     }
 
-
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
 }
