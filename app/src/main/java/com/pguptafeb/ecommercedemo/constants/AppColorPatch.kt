@@ -7,10 +7,10 @@ import java.util.*
  * Created by Prashant G. Gupta on 17, Jan 2020
  */
 enum class AppColorPatch(val appColor: String, val colorHex: String) {
-    RED("red", "#AED11E"),
-    SILVER("silver", "#AED11E"),
-    BLUE("blue", "#AED11E"),
-    GREEN("green", "#AED11E"),
+    RED("red", "#ff0000"),
+    SILVER("silver", "#D0D2D1"),
+    BLUE("blue", "#0000FF"),
+    GREEN("green", "#008000"),
     WHITE("white", "#FFFFFF")
 }
 

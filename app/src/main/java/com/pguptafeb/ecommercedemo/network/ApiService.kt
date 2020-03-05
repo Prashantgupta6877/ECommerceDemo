@@ -10,6 +10,6 @@ import retrofit2.http.GET
  */
 interface ApiService {
 
-    @GET("5e26f4472f0000afa3a4f8af")
-    fun getAllProducts():Observable<ModelServerResponse>
+    @GET("json")
+    fun getAllProducts(): Observable<ModelServerResponse>
 }

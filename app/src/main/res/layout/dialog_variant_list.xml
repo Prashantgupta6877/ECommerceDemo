@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dim_white">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtVariantTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:gravity="center"
+        android:text="@string/variants"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/imgClose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgClose"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtVariantTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtVariantTitle"
+        app:srcCompat="@drawable/ic_close" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVariantList"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/imgClose"
+        app:layout_constraintStart_toStartOf="@id/txtVariantTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtVariantTitle"
+android:layout_marginTop="10dp"
+        tools:listitem="@layout/list_item_available_variants" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

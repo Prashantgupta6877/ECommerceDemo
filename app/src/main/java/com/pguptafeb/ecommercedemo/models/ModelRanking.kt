@@ -13,8 +13,7 @@ import com.squareup.moshi.Json
 
 private const val TABLE_NAME_RANKING = "Ranking"
 private const val RANKING_NAME = "ranking_name"
-private const val RANKING_ID = "ranking_id"
-private const val IS_SELECTED = "is_selected"
+const val RANKING_ID = "ranking_id"
 
 @DatabaseTable(tableName = TABLE_NAME_RANKING)
 class ModelRanking {

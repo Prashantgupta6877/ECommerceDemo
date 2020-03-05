@@ -4,7 +4,6 @@ import com.j256.ormlite.dao.Dao
 import com.pguptafeb.ecommercedemo.database.BaseDatabase
 import com.pguptafeb.ecommercedemo.models.ModelProduct
 
-
 /**
  * Created by Prashant G. Gupta on 14, Jan 2020
  */

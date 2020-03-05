@@ -15,6 +15,8 @@ interface DashboardContract {
         fun showProductList(products: MutableList<ModelProduct>)
 
         fun setUpInitialUi()
+
+        fun showNativeAlert(message: String)
     }
 
     interface Presenter {
