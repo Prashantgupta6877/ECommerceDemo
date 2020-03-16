@@ -3,8 +3,6 @@ package com.pguptafeb.ecommercedemo.adapters
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pguptafeb.ecommercedemo.R
 import com.pguptafeb.ecommercedemo.constants.getAppColorPatchInHex
 import com.pguptafeb.ecommercedemo.extensions.toNotNullString
-import com.pguptafeb.ecommercedemo.models.ModelProduct
-import com.pguptafeb.ecommercedemo.models.ModelRanking
 import com.pguptafeb.ecommercedemo.models.ModelVariant
 import kotlinx.android.synthetic.main.list_item_products.view.*
 

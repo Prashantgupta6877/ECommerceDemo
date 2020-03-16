@@ -47,7 +47,7 @@ class SortingBottomSheet(
                 DividerItemDecoration.VERTICAL
             )
         )
-        rvSortingOptions.adapter = SortingOptionAdapter(rankings, rankingUserSelection,this)
+        rvSortingOptions.adapter = SortingOptionAdapter(rankings, rankingUserSelection, this)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -15,10 +15,17 @@ import kotlinx.android.synthetic.main.list_item_sorting_options.view.*
 /**
  * Created by Prashant G. Gupta on 17, Jan 2020
  */
-class SortingOptionAdapter(private var rankings: MutableList<ModelRanking>, var rankingUserSelection: ModelRanking?, private val itemSelectedListener: OnSelectedItemListener) : RecyclerView.Adapter<SortingOptionAdapter.ViewHolder>() {
+class SortingOptionAdapter(
+    private var rankings: MutableList<ModelRanking>,
+    var rankingUserSelection: ModelRanking?,
+    private val itemSelectedListener: OnSelectedItemListener
+) : RecyclerView.Adapter<SortingOptionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_sorting_options, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.list_item_sorting_options, parent, false)
+        )
     }
 
     override fun getItemCount() = rankings.size
@@ -41,11 +48,31 @@ class SortingOptionAdapter(private var rankings: MutableList<ModelRanking>, var 
 
     private fun showItemSelected(isSelected: Boolean, txtSortingOption: TextView) {
         if (isSelected) {
-            txtSortingOption.setTextColor(ContextCompat.getColor(ECommerceApplication.context, R.color.redSort))
-            txtSortingOption.setBackgroundColor(ContextCompat.getColor(ECommerceApplication.context, R.color.activeBgColor))
-            txtSortingOption.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, ContextCompat.getDrawable(ECommerceApplication.context, R.drawable.red_check_mark), null)
+            txtSortingOption.setTextColor(
+                ContextCompat.getColor(
+                    ECommerceApplication.context,
+                    R.color.redSort
+                )
+            )
+            txtSortingOption.setBackgroundColor(
+                ContextCompat.getColor(
+                    ECommerceApplication.context,
+                    R.color.activeBgColor
+                )
+            )
+            txtSortingOption.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                null,
+                null,
+                ContextCompat.getDrawable(ECommerceApplication.context, R.drawable.red_check_mark),
+                null
+            )
         } else {
-            txtSortingOption.setTextColor(ContextCompat.getColor(ECommerceApplication.context, R.color.black))
+            txtSortingOption.setTextColor(
+                ContextCompat.getColor(
+                    ECommerceApplication.context,
+                    R.color.black
+                )
+            )
             txtSortingOption.background = null
             txtSortingOption.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
         }

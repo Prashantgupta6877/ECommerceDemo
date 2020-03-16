@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pguptafeb.ecommercedemo.R
 import com.pguptafeb.ecommercedemo.constants.getAppColorPatchInHex
 import com.pguptafeb.ecommercedemo.database.dao.ProductRankingDao
-import com.pguptafeb.ecommercedemo.database.dao.RankingDao
 import com.pguptafeb.ecommercedemo.dialog.VariantDialog
 import com.pguptafeb.ecommercedemo.extensions.toNotNullString
 import com.pguptafeb.ecommercedemo.models.ModelProduct
@@ -114,11 +113,12 @@ class ProductListAdapters(
                         if (modelProduct.productName?.toLowerCase(Locale.US)?.contains(
                                 constraint.toString().toLowerCase(Locale.US)
                             ) == true ||
-                            modelProduct.modelCategory?.categoryName?.toLowerCase(Locale.US)?.contains(
-                                constraint.toString().toLowerCase(
-                                    Locale.US
-                                )
-                            ) == true
+                            modelProduct.modelCategory?.categoryName?.toLowerCase(Locale.US)
+                                ?.contains(
+                                    constraint.toString().toLowerCase(
+                                        Locale.US
+                                    )
+                                ) == true
                         )
                             filteredList.add(modelProduct)
                     }
