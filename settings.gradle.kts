@@ -1,2 +1,2 @@
-include(":app", ":montserrat")
+include(":app", ":montserrat",":debugLibraries")
 rootProject.name = "ECommerceDemo"

@@ -29,6 +29,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        isAbortOnError = false
+    }
 }
 
 dependencies {
@@ -47,5 +51,9 @@ dependencies {
     implementation(Libs.recyclerview)
     implementation(Libs.material)
     implementation(project(":montserrat"))
+
+    if (project.findProperty("buildOption") == "debug") {
+        implementation(project(":debugLibraries"))
+    }
 }
 
